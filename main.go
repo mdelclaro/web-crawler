@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"io"
+	"log"
 	"net/http"
 	"net/url"
 	"os"
@@ -31,7 +32,11 @@ func main() {
 	flag.Parse()
 
 	if target == "" {
-		println("url flag is required")
+		log.Fatal("url flag is required")
+	}
+
+	if !strings.HasPrefix(target, "http") {
+		log.Fatal("invalid url provided. valid ex.: https://github.com")
 	}
 
 	if dir == "" {
